@@ -11,6 +11,7 @@ import Contact from './components/Contact.jsx';
 import NavBar from './components/NavBar.jsx';
 import Login from './components/Login.jsx'
 import Home from './components/Home.jsx';
+import FetchFavouritecomponent from './components/FetchFavouritecomponent.jsx';
 
 class MainComponent extends React.Component{
 
@@ -31,6 +32,7 @@ ReactDOM.render(
                 <Route path = "/home" component = {Home} />
                 <Route path="/about" component={About}/>
                 <Route path="/contact" component={Contact}/>
+                <Route path = "/favrestaurants" component={FetchFavouritecomponent} />
             </Route>
 
 </Router>,document.getElementById('content'));

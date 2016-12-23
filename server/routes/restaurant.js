@@ -3,7 +3,7 @@ var router = express.Router();
 
 var restaurant = require('../models/restaurant');
 
-router.post('/save', function(req, res)
+router.post('/save',isLoggedIn, function(req, res)
 {
       var saverestaurant = new restaurant
       ({
@@ -21,17 +21,19 @@ router.post('/save', function(req, res)
      saverestaurant.save(function (err) {
          if (err)
          {
-           res.send(err);
+           console.log(err);
+           res.send("Error of duplication");
          }
         else {
-          res.send(" Restaurant saved ");
+          res.send("Restaurant saved ");
         }
     }); //end of save function
 }); //end of post route save
 
+//
 
 
-router.delete('/delete',function(req,res)
+router.delete('/delete',isLoggedIn,function(req,res)
 {
    if(req.body)
    {
@@ -49,7 +51,7 @@ router.delete('/delete',function(req,res)
    }
 });
 
-router.put('/update',function(req,res,next)
+router.put('/update',isLoggedIn,function(req,res,next)
 {
     var restaurantId = req.body.restaurant_id;
     var myComment = req.body.comments;
@@ -67,7 +69,7 @@ router.put('/update',function(req,res,next)
 });
 
 
-router.get('/view', function(req, res) {
+router.get('/view',isLoggedIn, function(req, res) {
       restaurant.find({},function(err, alldetails)
       {
          if(err) throw err;
@@ -77,5 +79,17 @@ router.get('/view', function(req, res) {
          }
         });
 });
+
+function isLoggedIn(req,res,next){
+  console.log("isloggedin ");
+  if(req.isAuthenticated()){
+    console.log("IF OF IS LOGGED in");
+    return next();
+  }
+  else{
+    console.log("else OF IS LOGGED in");
+    res.json("Login Before Operation");
+  }
+}
 
 module.exports = router;

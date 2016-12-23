@@ -5,6 +5,7 @@ export default class IterateRestro extends React.Component
 {
 	constructor(){
 		super();
+
 	}
 
 	render()
@@ -13,7 +14,7 @@ export default class IterateRestro extends React.Component
 			<div>
 			<h3>iterate</h3>
 				{
-
+					
 					this.props.allrestroarr.map(function(item){
 					return(<DisplayRestro restaurantarr = {item} />)
 				})
